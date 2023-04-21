@@ -47,7 +47,7 @@ class SuperUser extends Page  {
 
          $data['profit_b'] = $data['revenue_b'][0]->revenue;
       }
-
+      $data['earnings'] = $this->runQuery($this->select('earnings_overview'));
       $data['products_DB'] = $this->runQuery($this->select('products'));
       $data['messages'] = $this->runQuery($this->countAll('products_request'));
 

@@ -41,6 +41,15 @@ include_file('pages/topbar');
 <!-- Content Row -->
 <div class="row">
 
+<?php 
+
+$graph_data = [];
+
+foreach ($data['earnings'] as $value) {
+  array_push($graph_data, $value->total);
+}
+?>
+
     <!-- =================== STATION A==================================================== -->
     <!-- AREA 25 -->
     <div class="col-xl-4 col-md-6 mb-4">
@@ -187,7 +196,7 @@ include_file('pages/topbar');
       <div class="card shadow mb-4">
           <!-- Card Header - Dropdown -->
           <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-              <h6 class="m-0 font-weight-bold text-primary">Earnings Overview</h6>
+              <h6 class="m-0 font-weight-bold text-primary">Earnings Overview 2023 Respectively</h6>
               <div class="dropdown no-arrow">
                   <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
@@ -215,18 +224,18 @@ include_file('pages/topbar');
       <div class="card shadow mb-4">
           <!-- Card Header - Dropdown -->
           <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-              <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
+              <h6 class="m-0 font-weight-bold text-primary">Business Overview</h6>
               <div class="dropdown no-arrow">
                   <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
                   </a>
-                  <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
+                  <!-- <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
                       <div class="dropdown-header">Dropdown Header:</div>
                       <a class="dropdown-item" href="#">Action</a>
                       <a class="dropdown-item" href="#">Another action</a>
                       <div class="dropdown-divider"></div>
                       <a class="dropdown-item" href="#">Something else here</a>
-                  </div>
+                  </div> -->
               </div>
           </div>
           <!-- Card Body -->
@@ -236,13 +245,13 @@ include_file('pages/topbar');
               </div>
               <div class="mt-4 text-center small">
                   <span class="mr-2">
-                      <i class="fas fa-circle text-primary"></i> Direct
+                      <i class="fas fa-circle text-primary"></i> Profits
                   </span>
                   <span class="mr-2">
-                      <i class="fas fa-circle text-success"></i> Social
+                      <i class="fas fa-circle text-success"></i> Revenue
                   </span>
                   <span class="mr-2">
-                      <i class="fas fa-circle text-info"></i> Referral
+                      <i class="fas fa-circle text-info"></i> Expenses
                   </span>
               </div>
           </div>
@@ -319,7 +328,7 @@ var ctx = document.getElementById("myAreaChart");
 var myLineChart = new Chart(ctx, {
   type: 'line',
   data: {
-    labels: ["Jan", "Feb", "Mar", "Apr", "<?php echo $data['messages'][0]->num;?>", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+    labels: ["Jan", "Feb", "Mar", "Apr"],
     datasets: [{
       label: "Earnings",
       lineTension: 0.3,
@@ -333,7 +342,7 @@ var myLineChart = new Chart(ctx, {
       pointHoverBorderColor: "rgba(78, 115, 223, 1)",
       pointHitRadius: 10,
       pointBorderWidth: 2,
-      data: [0, 10000, 5000, 15000, 10000, 20000, 15000, 25000, 20000, 30000, 25000, 40000],
+      data: [<?php echo implode(', ', $graph_data);?>],
     }],
   },
   options: {
@@ -365,7 +374,7 @@ var myLineChart = new Chart(ctx, {
           padding: 10,
           // Include a dollar sign in the ticks
           callback: function(value, index, values) {
-            return '$' + number_format(value);
+            return 'MK' + number_format(value);
           }
         },
         gridLines: {
@@ -417,7 +426,7 @@ var ctx = document.getElementById("myPieChart");
 var myPieChart = new Chart(ctx, {
   type: 'doughnut',
   data: {
-    labels: ["Direct", "Referral", "Social"],
+    labels: ["Profits", "Revenue", "Expenses"],
     datasets: [{
       data: [55, 30, 15],
       backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc'],
