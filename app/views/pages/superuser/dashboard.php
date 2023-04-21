@@ -245,13 +245,13 @@ foreach ($data['earnings'] as $value) {
               </div>
               <div class="mt-4 text-center small">
                   <span class="mr-2">
-                      <i class="fas fa-circle text-primary"></i> Profits
+                      <i class="fas fa-circle text-primary"></i> Good
                   </span>
                   <span class="mr-2">
-                      <i class="fas fa-circle text-success"></i> Revenue
+                      <i class="fas fa-circle text-success"></i> Perfect
                   </span>
                   <span class="mr-2">
-                      <i class="fas fa-circle text-info"></i> Expenses
+                      <i class="fas fa-circle text-info"></i> Better
                   </span>
               </div>
           </div>
@@ -426,9 +426,9 @@ var ctx = document.getElementById("myPieChart");
 var myPieChart = new Chart(ctx, {
   type: 'doughnut',
   data: {
-    labels: ["Profits", "Revenue", "Expenses"],
+    labels: ["Jan", "Feb", "Mar", "Apr"],
     datasets: [{
-      data: [55, 30, 15],
+      data: [<?php echo implode(', ', $graph_data);?>],
       backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc'],
       hoverBackgroundColor: ['#2e59d9', '#17a673', '#2c9faf'],
       hoverBorderColor: "rgba(234, 236, 244, 1)",
