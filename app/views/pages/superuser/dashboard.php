@@ -14,7 +14,11 @@ include_file('pages/topbar');
 
 ?>
 
-
+<div class="mb-3">
+  <span id="spinner" class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+  <span class="visually-hidden" id="status"></span>
+</div>
+<br>
 <a class="text-decoration-none font-weight-bold" href="<?php echo URL('messages');?>">
     
 <div class="alert alert-danger d-flex align-items-center" role="alert">
@@ -23,7 +27,7 @@ include_file('pages/topbar');
       <i class="bi bi-envelope"></i>
       <!-- Counter - Messages -->
       <span style="font-size: 9px!important;" class="badge badge-danger badge-counter"><?php echo $data['messages'][0]->num;?></span>
-      Messages.
+      Message(s).
     </a>
   </div>
 </div>
@@ -263,6 +267,23 @@ include_file('pages/topbar');
 
 <?php include_file('templates/copyrights'); ?>
 <?php include_file('templates/footer'); ?>
+<script>
+  const status = document.getElementById("status");
+  const spinner = document.getElementById("spinner");
+
+  if (navigator.onLine) {
+
+    spinner.classList.add("text-success");
+    status.innerHTML = 'You are Online.';
+
+  } else {
+
+    spinner.classList.add("text-warning");
+    status.innerHTML = 'You are Offline.';
+
+  }
+
+</script>
 <script>
   // Set new default font family and font color to mimic Bootstrap's default styling
 Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
